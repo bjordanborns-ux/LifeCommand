@@ -2730,4 +2730,154 @@ html[data-theme] .embed-frame-wrap {
   .timeline-item::before {
     display: none !important;
   }
+/* Tablet + mobile optimization */
+@media (max-width: 1100px) {
+  .topbar {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px 22px;
+  }
+
+  .topbar-actions {
+    margin-left: 0;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .date-card {
+    width: 100%;
+    max-width: 260px;
+    min-width: 0;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+
+  .hero,
+  .projects-panel,
+  .project-workspace,
+  .timeline-panel,
+  .notes,
+  .rolling-log-panel {
+    grid-column: span 1;
+  }
+
+  .command-dashboard,
+  .workspace-grid,
+  .settings-grid,
+  .space-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .starlink-wide-card,
+  .launch-highlight {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 2.7rem;
+  }
+
+  h2,
+  .command-board-title {
+    font-size: 1.8rem !important;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 28px;
+  }
+
+  .hero::after {
+    font-size: 82px;
+    right: 16px;
+    bottom: -10px;
+  }
+
+  .row,
+  .form-row-2,
+  .friendly-form .form-row-2,
+  #homeworkForm .form-row-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .project-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .item,
+  .log-entry {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .actions button {
+    flex: 1;
+  }
+
+  .weather-current {
+    grid-template-columns: 1fr;
+  }
+
+  .hourly-card {
+    min-width: 145px;
+  }
+
+  .timeline-item {
+    grid-template-columns: 1fr !important;
+  }
+
+  .timeline-time {
+    min-width: 0;
+  }
+
+  .timeline-list::before,
+  .timeline-item::before {
+    display: none !important;
+  }
+
+  .date-card {
+    max-width: 220px;
+    padding: 10px 12px;
+  }
+
+  .date-card strong {
+    font-size: 1.3rem;
+  }
+
+  .space-dashboard-page,
+  .settings-page {
+    padding: 22px;
+  }
+
+  .space-dashboard-hero,
+  .settings-hero {
+    padding: 28px !important;
+    min-height: auto !important;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .embed-frame-wrap iframe,
+  .news-embed iframe,
+  .starlink-wide-card .embed-frame-wrap iframe,
+  .space-news-card .embed-frame-wrap iframe {
+    height: 340px;
+  }
 }
