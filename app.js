@@ -29,6 +29,46 @@ async function testConnection() {
 
 testConnection();
 
+async function loadTodosFromSupabase() {
+  if (!supabaseClient) return;
+
+  const { data, error } = await supabaseClient
+    .from("life_entries")
+    .select("*")
+    .eq("type", "todo")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Could not load todos:", error);
+    return;
+  }
+
+  todos = data.map(item => ({
+    id: item.id,
+    text: item.title,
+    priority: item.status || "important",
+    done: item.done || false
+  }));
+
+  render();
+}
+
+async function saveTodoToSupabase(todo) {
+  if (!supabaseClient) return;
+
+  const { error } = await supabaseClient
+    .from("life_entries")
+    .insert({
+      id: todo.id,
+      title: todo.text,
+      type: "todo",
+      status: todo.priority,
+      done: todo.done
+    });
+
+  if (error) console.error("Could not save todo:", error);
+}
+
 const $ = (id) => document.getElementById(id);
 
 const store = {
@@ -1861,15 +1901,18 @@ function bindForms() {
 
   const todoForm = $("todoForm");
   if (todoForm) {
-    todoForm.addEventListener("submit", (e) => {
+    todoForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      todos.push({
-        id: uid(),
-        text: $("todoInput").value.trim(),
-        priority: $("todoPriority") ? $("todoPriority").value : "important",
-        done: false
-      });
+  const newTodo = {
+    id: uid(),
+    text: $("todoInput").value.trim(),
+    priority: $("todoPriority") ? $("todoPriority").value : "important",
+    done: false
+};
+
+todos.push(newTodo);
+await saveTodoToSupabase(newTodo);
 
       e.target.reset();
       render();
@@ -1997,5 +2040,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(updateClock, 1000);
   setInterval(updateSpaceCountdown, 60000);
   render();
+  loadTodosFromSupabase();
   loadWeather();
 });
