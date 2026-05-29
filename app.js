@@ -7,7 +7,7 @@ const supabaseClient = supabase.createClient(
   SUPABASE_KEY
 );
 
-async function testconnection() {
+async function testConnection() {
   const { data, error } = await supabaseClient
     .from("life_entries")
     .select("*");
