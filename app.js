@@ -3,9 +3,24 @@ const SUPABASE_URL = "https://xbnurfmszprytqsdtbva.supabase.co";
 const SUPABASE_KEY = "sb_publishable_d4gI2mbbmX-ihEXNMUFZuQ_It98nl3K";
 
 const supabaseClient = supabase.createClient(
-  https://xbnurfmszprytqsdtbva.supabase.co
-  sb_publishable_d4gI2mbbmX-ihEXNMUFZuQ_It98nl3K
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
+
+async function testconnection() {
+  const { data, error } = await supabaseClient
+    .from("life_entries")
+    .select("*");
+
+  if (error) {
+    console.error("Supabase error:", error);
+    return;
+  }
+
+  console.log("Connected to Supabase:", data);
+}
+
+testConnection();
 
 const $ = (id) => document.getElementById(id);
 
