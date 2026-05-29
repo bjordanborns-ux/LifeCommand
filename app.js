@@ -1,13 +1,20 @@
 const SUPABASE_URL = "https://xbnurfmszprytqsdtbva.supabase.co";
-
 const SUPABASE_KEY = "sb_publishable_d4gI2mbbmX-ihEXNMUFZuQ_It98nl3K";
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+let supabaseClient = null;
+
+if (window.supabase) {
+  supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+} else {
+  console.warn("Supabase library did not load. App will keep running without cloud sync.");
+}
 
 async function testConnection() {
+  if (!supabaseClient) return;
+
   const { data, error } = await supabaseClient
     .from("life_entries")
     .select("*");
