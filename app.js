@@ -1,3 +1,11 @@
+const SUPABASE_URL = "https://xbnurfmszprytqsdtbva.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_d4gI2mbbmX-ihEXNMUFZuQ_It98nl3K";
+
+const supabaseClient = supabase.createClient(
+  https://xbnurfmszprytqsdtbva.supabase.co
+  sb_publishable_d4gI2mbbmX-ihEXNMUFZuQ_It98nl3K
+);
 
 const $ = (id) => document.getElementById(id);
 
