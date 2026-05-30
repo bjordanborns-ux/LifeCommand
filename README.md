@@ -9,16 +9,43 @@ A simple personal operations dashboard.
 - Todo list
 - Shopping list
 - GitHub/project links
-- Notes
-- Local browser storage
+- Rolling log
+- Weather
+- Space dashboard
+- Supabase cloud sync
 
-## How to run
+## Storage
 
-Open `index.html` in your browser.
+Life Command now saves the main dashboard state to Supabase using the `life_entries` table.
 
-No install needed.
+Synced through Supabase:
 
-## Important
+- Calendar
+- Homework
+- Todos
+- Shopping
+- Projects
+- Rolling log
 
-This version saves data in your browser using localStorage.
-If you clear browser data, the saved dashboard data can disappear.
+Kept in localStorage as device settings:
+
+- Theme
+- Google Calendar API settings
+- ISS pass API URL
+
+## Supabase requirements
+
+The `life_entries` table needs a `data` column:
+
+- name: `data`
+- type: `jsonb`
+- default: `{}`
+
+RLS policies needed:
+
+- SELECT
+- INSERT
+- UPDATE
+- DELETE
+
+For personal testing, each policy can use `true`.
